@@ -1,0 +1,4 @@
+<article>
+    Фильм № {{ movie.id }}. {{ movie.title }} (реж: {{ movie.director }}, выход: {{ movie.year }})
+    <a href="{% url 'movie_detail' movie.id %}">Подробнее</a>
+</article>

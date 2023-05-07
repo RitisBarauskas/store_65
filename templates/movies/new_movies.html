@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Новинки {{ year }} года.
+{% endblock %}
+
+{% block header %}
+    Фильмы {{ year }} года.
+{% endblock %}
+
+{% block main %}
+    {% for movie in movies %}
+        {% include 'movies/includes/movie.html' %}
+    {% endfor %}
+
+    <a href="{% url 'main' %}">На главную</a>
+{% endblock %}

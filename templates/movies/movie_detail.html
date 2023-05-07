@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Фильм {{ movie.title }}
+{% endblock %}
+
+{% block header %}
+    {{ movie.title }} ({{ movie.year }})
+{% endblock %}
+
+{% block main %}
+    Фильм {{ movie.title }} вышел в {{ movie.year }}
+    <br>Его снял {{ movie.director }}
+    <br>
+    <a href="{% url 'main' %}">На главную</a>
+    <a href="{% url 'new_movies' %}">Только новые фильмы</a>
+{% endblock %}
