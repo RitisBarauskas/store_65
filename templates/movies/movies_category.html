@@ -1,16 +1,15 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Магазин Питон-65 (вкладка)
+    Фильмы в жанре: {{ category.name }}
 {% endblock %}
 
 {% block header %}
-    Магазин Питон-65
+    Фильмы в жанре: {{ category.name }}
 {% endblock %}
 
 {% block main %}
     {% for movie in movies %}
         {% include 'movies/includes/movie.html' %}
     {% endfor %}
-    <a href="{% url 'movies:new_movies' %}">Только новые фильмы</a>
 {% endblock %}

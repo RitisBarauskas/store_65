@@ -1,0 +1,41 @@
+{% load static %}
+<header>
+  <nav class="navbar navbar-light" style="background-color: lightskyblue">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'movies:main' %}">
+        Магазин фильмов
+      </a>
+      {% with request.resolver_match.view_name as view_name %}
+{#        {% if request.user.is_authenticated %}#}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'movies:stores' %}">Наши магазины</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'movies:main' %}">Новая запись</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link {% if view_name  == 'users:password_change' %}active{% endif %}" 
+              href="{% url 'users:password_change' %}">Изменить пароль</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link {% if view_name  == 'users:logout' %}active{% endif %}" 
+              href="{% url 'users:logout' %}">Выйти</a>
+          </li>
+          <li>
+            Пользователь: {{ user.username }}
+          </li>
+{#        {% else %}#}
+          <li class="nav-item"> 
+            <a class="nav-link {% if view_name  == 'users:login' %}active{% endif %}" 
+              href="{% url 'users:login' %}">Войти</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link {% if view_name  == 'users:signup' %}active{% endif %}" 
+              href="{% url 'users:signup' %}">Регистрация</a>
+          </li>
+{#        {% endif %}#}
+      </ul>
+      {% endwith %}
+    </div>
+  </nav>      
+</header> 

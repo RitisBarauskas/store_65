@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Магазины
+{% endblock %}
+
+{% block header %}
+    Магазины
+{% endblock %}
+
+{% block main %}
+    {% for store in stores %}
+        {{ store.name }} расположен {{ store.address }}
+        -- <a href="{% url 'movies:store_movies' store.id %}">Фильмы магазина</a>
+        <br>
+        <ul>
+            {% for movie in store.movies.all %}
+                <li>{{ movie.title }} от режиссера {{ movie.director.name }} в категории {{ movie.category.name }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+{% endblock %}

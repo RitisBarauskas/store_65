@@ -1,4 +1,7 @@
 <article>
-    Фильм № {{ movie.id }}. {{ movie.title }} (реж: {{ movie.director }}, выход: {{ movie.year }})
-    <a href="{% url 'movie_detail' movie.id %}">Подробнее</a>
+    Фильм № {{ movie.id }}.
+    {{ movie.title }}
+    (реж: <a href="{% url 'movies:movies_director' movie.director_id %}"> {{ movie.director.name }}</a>, выход: {{ movie.year }})
+    -- жанр: <a href="{% url 'movies:movies_category' movie.category_id %}"> {{ movie.category.name }}</a>
+    <a href="{% url 'movies:movie_detail' movie.id %}">Подробнее</a>
 </article>
