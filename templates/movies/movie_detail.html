@@ -8,10 +8,7 @@
     {{ movie.title }} ({{ movie.year }})
 {% endblock %}
 
-{% block main %}
+{% block content %}
     Фильм {{ movie.title }} вышел в {{ movie.year }}
     <br>Его снял {{ movie.director.name }}
-    <br>
-    <a href="{% url 'movies:main' %}">На главную</a>
-    <a href="{% url 'movies:new_movies' %}">Только новые фильмы</a>
 {% endblock %}

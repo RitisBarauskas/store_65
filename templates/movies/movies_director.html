@@ -8,7 +8,7 @@
     Фильмы от режиссера: {{ director.name }}
 {% endblock %}
 
-{% block main %}
+{% block content %}
     {% for movie in movies %}
         {% include 'movies/includes/movie.html' %}
     {% endfor %}

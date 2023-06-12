@@ -3,39 +3,38 @@
   <nav class="navbar navbar-light" style="background-color: lightskyblue">
     <div class="container">
       <a class="navbar-brand" href="{% url 'movies:main' %}">
-        Магазин фильмов
+        <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+        Store-65 Movies
       </a>
       {% with request.resolver_match.view_name as view_name %}
-{#        {% if request.user.is_authenticated %}#}
+        <ul class="nav  nav-pills">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'movies:stores' %}">Наши магазины</a>
+            <a class="nav-link {% if view_name == 'movies:stores' %} text-white {% endif %}" href="{% url 'movies:stores' %}">
+              Наши магазины
+            </a>
           </li>
-          <li class="nav-item"> 
-            <a class="nav-link" href="{% url 'movies:main' %}">Новая запись</a>
+          <li class="nav-item">
+            <a class="nav-link {% if view_name == 'movies:new_movies' %} text-white {% endif %}" href="{% url 'movies:new_movies' %}">
+              Только новые фильмы
+            </a>
           </li>
-          <li class="nav-item"> 
-            <a class="nav-link {% if view_name  == 'users:password_change' %}active{% endif %}" 
-              href="{% url 'users:password_change' %}">Изменить пароль</a>
-          </li>
-          <li class="nav-item"> 
-            <a class="nav-link {% if view_name  == 'users:logout' %}active{% endif %}" 
-              href="{% url 'users:logout' %}">Выйти</a>
-          </li>
-          <li>
-            Пользователь: {{ user.username }}
-          </li>
-{#        {% else %}#}
-          <li class="nav-item"> 
-            <a class="nav-link {% if view_name  == 'users:login' %}active{% endif %}" 
-              href="{% url 'users:login' %}">Войти</a>
-          </li>
-          <li class="nav-item"> 
-            <a class="nav-link {% if view_name  == 'users:signup' %}active{% endif %}" 
-              href="{% url 'users:signup' %}">Регистрация</a>
-          </li>
-{#        {% endif %}#}
-      </ul>
+          {% if user.is_authenticated %}
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+              <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
+                  href="{% url 'movies:main' %}">Добавить фильм</a></button>
+              <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
+                  href="{% url 'logout' %}">Выйти</a></button>
+            </div>
+          {% else %}
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+              <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
+                  href="{% url 'login' %}">Войти</a></button>
+              <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
+                  href="{% url 'registration' %}">Регистрация</a></button>
+            </div>
+          {% endif %}
+        </ul>
       {% endwith %}
     </div>
-  </nav>      
-</header> 
+  </nav>
+</header>

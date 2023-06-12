@@ -8,10 +8,8 @@
     Фильмы {{ year }} года.
 {% endblock %}
 
-{% block main %}
+{% block content %}
     {% for movie in movies %}
         {% include 'movies/includes/movie.html' %}
     {% endfor %}
-
-    <a href="{% url 'movies:main' %}">На главную</a>
 {% endblock %}
