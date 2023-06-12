@@ -5,12 +5,11 @@
 {% endblock %}
 
 {% block header %}
-    Магазин Питон-65
+    Наши фильмы
 {% endblock %}
 
 {% block content %}
     {% for movie in movies %}
         {% include 'movies/includes/movie.html' %}
     {% endfor %}
-    <a href="{% url 'movies:new_movies' %}">Только новые фильмы</a>
 {% endblock %}
