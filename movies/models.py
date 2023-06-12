@@ -48,7 +48,7 @@ class Movie(TimeStampModel):
 class Store(TimeStampModel):
     name = models.CharField(max_length=200, verbose_name='Название')
     address = models.CharField(max_length=200, verbose_name='Адрес')
-    movies = models.ManyToManyField(Movie, related_name='stores', verbose_name='Фильмы')
+    movies = models.ManyToManyField(Movie, related_name='stores', verbose_name='Фильмы', through='StoreMovie')
 
     class Meta:
         verbose_name = 'Магазин'
@@ -57,3 +57,17 @@ class Store(TimeStampModel):
 
     def __str__(self):
         return self.name
+
+
+class StoreMovie(TimeStampModel):
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='store_movies', verbose_name='Магазин')
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='store_movies', verbose_name='Фильм')
+    quantity = models.IntegerField(verbose_name='Количество')
+
+    class Meta:
+        verbose_name = 'Фильм в магазине'
+        verbose_name_plural = 'Фильмы в магазинах'
+        ordering = ('id',)
+
+    def __str__(self):
+        return f'{self.movie} в {self.store} в количестве {self.quantity}'

@@ -1,7 +1,9 @@
 from datetime import date
 
-from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
 
+from .forms import MovieForm, MovieToStoreForm
 from .models import Movie, Category, Director, Store
 from .helpers import query_debugger
 
@@ -89,3 +91,26 @@ def store_movies(request, store_id):
     }
 
     return render(request, 'movies/store_movies.html', context)
+
+
+@login_required
+def create_movie(request):
+    """Создание фильма."""
+    form = MovieForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('movies:movie_detail', movie_id=form.instance.id)
+
+    return render(request, 'movies/create_movie.html', {'form': form})
+
+
+@login_required
+def movie_to_store(request):
+    """Добавление фильма в магазин."""
+    form = MovieToStoreForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('movies:store_movies', store_id=form.instance.id)
+
+    return render(request, 'movies/movie_to_store.html', {'form': form})
+
